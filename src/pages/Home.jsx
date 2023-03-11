@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import TaskForm from '../components/TaskForm'
 import { client } from '../supabase/client'
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
     <div>
       <h1>Home</h1>
       <button onClick={() => client.auth.signOut()}>Log Out</button>
+      <TaskForm />
     </div>
   )
 }

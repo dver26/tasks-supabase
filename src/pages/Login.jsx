@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { client } from '../supabase/client'
 
 const Login = () => {
   const [email, setEmail] = useState('')
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -18,6 +20,16 @@ const Login = () => {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    async function getUser() {
+      const {
+        data: { user }
+      } = await client.auth.getUser()
+      if (user) navigate('/')
+    }
+    getUser()
+  }, [])
 
   return (
     <div className='App'>
